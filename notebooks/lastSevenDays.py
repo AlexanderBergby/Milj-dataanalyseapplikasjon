@@ -2,25 +2,22 @@ import requests
 from datetime import datetime, timedelta #for å kunne enklere behandle og visualisere dato og tid
 import pandas as pd  #for å kunne lagre til CSV til sendere databehandling
 
-# API-nøkkel
-client_id = "e1e74478-764e-4bac-8a69-f70fe2ed8c6d"
+client_id = "e1e74478-764e-4bac-8a69-f70fe2ed8c6d" # API-nøkkel
+observations_url = "https://frost.met.no/observations/v0.jsonld" # URL til værdata
 
-# URL til værdata
-observations_url = "https://frost.met.no/observations/v0.jsonld"
 
-# Værstasjon
-valgt_stasjon = "SN68090"
+valgt_stasjon = "SN68090" # Værstasjon ID
 print("\nVærstasjon: Trondheim - Granåsen.")
 
-# Værparametere vi ønsker å hente
+#Elementene vi ønsker å hente fra API-en
 temperatur_element = "air_temperature"
 nedbør_element = "sum(precipitation_amount P1D)"
 vindhastighet_element = "wind_speed"
 
-# Hente data for de siste 7 dagene
-idag = datetime.utcnow().date()
-start_dato = (idag - timedelta(days=7)).strftime("%Y-%m-%d")
-slutt_dato = idag.strftime("%Y-%m-%d")
+#Henter data for de siste 7 dagene ved hjelp av datetime som er importert
+idag = datetime.utcnow().date() #henter dagens dato i UTC
+start_dato = (idag - timedelta(days=7)).strftime("%Y-%m-%d") #trekker fra 7 dager i fra dagens dato og lagrer som start-dato som string
+slutt_dato = idag.strftime("%Y-%m-%d") #lagrer sluttdato som string
 
 # Parametere for API-forespørsel
 params = {
@@ -29,7 +26,7 @@ params = {
     "referencetime": f"{start_dato}/{slutt_dato}"
 }
 
-response = requests.get(observations_url, params=params, auth=(client_id, ""))
+response = requests.get(observations_url, params=params, auth=(client_id, "")) #gjennomfører API-kallet
 
 if response.status_code == 200:
     data = response.json()["data"]
