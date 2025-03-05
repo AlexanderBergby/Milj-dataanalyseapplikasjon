@@ -28,7 +28,7 @@ params = {
 
 response = requests.get(observations_url, params=params, auth=(client_id, "")) #gjennomfører API-kallet
 
-if response.status_code == 200:
+if response.status_code == 200: 
     data = response.json()["data"]
 
     # Lagring av værdata
