@@ -90,9 +90,9 @@ if response.status_code == 200:
 
     # Opprett en DataFrame for å lagre til CSV
     df = pd.DataFrame(rows)
-    df.to_csv("weather_data.csv", index=False)
+    df.to_csv("data/weather_data.csv", index=False)
 
-    print("Data lagret i 'weather_data.csv'.")
+    print("Data lagret i folderen Data som 'weather_data.csv'.")
 
 else:
     print("\nFeil ved henting av værdata:", response.status_code, response.text)
