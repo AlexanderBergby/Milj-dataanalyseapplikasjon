@@ -28,10 +28,10 @@ params = {
 
 response = requests.get(observations_url, params=params, auth=(client_id, "")) #gjennomfører API-kallet
 
-if response.status_code == 200: 
+if response.status_code == 200: #200 betyr at alt fungerte i request
     data = response.json()["data"]
 
-    # Lagring av værdata
+    # Lagring av data
     temperatur_data = {}
     nedbør_data = {}
     vind_data = {}
@@ -43,7 +43,7 @@ if response.status_code == 200:
         for obs in observasjoner:
             verdi = obs["value"]
             element = obs["elementId"]
-
+            #lagrer data for de ulike tidpsunktene i en liste
             if element == temperatur_element:
                 temperatur_data.setdefault(dato, []).append(verdi)
 
@@ -57,6 +57,7 @@ if response.status_code == 200:
     print("\nVærforhold de siste 7 dagene\n")
     rows = []  # Samler data til senere bruk i CSV
 
+    #finner min og max og gjennomsnitt for hver dag i listen av temperaturer 
     for dag_nummer, dato in enumerate(sorted(temperatur_data.keys()), 1):
         min_temp = min(temperatur_data[dato])
         max_temp = max(temperatur_data[dato])
@@ -75,7 +76,7 @@ if response.status_code == 200:
         print(f"   Nedbør: {nedbør_mengde:.1f} mm")
         print(f"   Vindhastighet: {vindhastighet if vindhastighet is not None else 'N/A'} m/s\n")
 
-        # Lagre hver rad som en dict
+        #Her samler vi alt i en liste med dictionaries som senere blir til en DataFrame.
         rows.append({
             "date": dato,
             "min_temp": min_temp,
