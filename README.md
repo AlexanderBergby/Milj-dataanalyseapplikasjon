@@ -15,7 +15,21 @@ Gruppen anser MET til å være både svært pålitelighet og av god kvalitet.
 
 Dataen som ble hentet fra denne API-en er:
 - Temperatur
-- Luftfuktighet
+- Nedbør
+- Vindhastighet
 
 Oppgave 3: Databehandling
+
+Gruppen har brukt pandas for å lagre data i en csv fil for å senere bruke dette i visualisering av dataen. 
+
+Gruppen kan forvente outliers (-50 eller +50 pga f.eks skrivefeil), manglende data eller inkonsekvente enheter (km/t eller m/s).
+I fremtidig behandling av dataen (innlevering av del 2) kan vi bruke:
+- sette logiske grenser for temp
+- df.isnull().sum() for å se antall manglende verdier (NaN) i hver kolonne.
+- videre kan vi bruke dropna/fillna/interpolate for å fylle manglende data
+
+List comprehensions:
+- Kan integreres for å sjekke og rette opp i inkonsekvente enheter.
+
+
 
