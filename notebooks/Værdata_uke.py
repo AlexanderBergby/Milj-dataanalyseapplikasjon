@@ -61,12 +61,12 @@ if response.status_code == 200: #200 betyr at alt fungerte i request
     for dag_nummer, dato in enumerate(sorted(temperatur_data.keys()), 1):
         min_temp = min(temperatur_data[dato])
         max_temp = max(temperatur_data[dato])
-        gjennomsnitt_temp = sum(temperatur_data[dato]) / len(temperatur_data[dato])
+        gjennomsnitt_temp = round(sum(temperatur_data[dato]) / len(temperatur_data[dato]),2)
 
         nedbør_mengde = nedbør_data.get(dato, 0)
 
         vindhastighet = (
-            sum(vind_data[dato]) / len(vind_data[dato])
+            round(sum(vind_data[dato]) / len(vind_data[dato]),2)
             if dato in vind_data and vind_data[dato]
             else None  # Bruk None i stedet for "N/A"
         )
