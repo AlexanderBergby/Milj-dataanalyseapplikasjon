@@ -1,4 +1,6 @@
 import requests
+import tkinter as tk
+from tkinter import messagebox
 
 url = "https://api.met.no/weatherapi/nowcast/2.0/complete"
 
@@ -31,7 +33,7 @@ def meny():
 
         if valg == "4":
             print("Ha en fin dag!")
-            return None, None
+            return None, None, None
         else:
             print("Ugyldig valg. Prøv igjen.")
 
@@ -69,6 +71,19 @@ if response.status_code == 200:
     print("Vindhastighet:", detaljer.get("wind_speed", "N/A"), "m/s") # Hent ut vindhastighet, eller "N/A" hvis det ikke finnes
     print("Vindkast:", detaljer.get("wind_speed_of_gust", "N/A"), "m/s") # Hent ut vindkast, eller "N/A" hvis det ikke finnes
     
+    symbol = første.get("data", {}).get("next_1_hours", {}).get("summary", {}).get("symbol_code", "")
+    if symbol:
+        if "clearsky" in symbol:
+            ikon = "☀️"   # Sol
+        elif "rain" in symbol:
+            ikon = "🌧️"   # Regn
+        elif "cloud" in symbol or "partlycloudy" in symbol:
+            ikon = "☁️"   # Skyet
+        else:
+            ikon = "❓"   # Ukjent vær
+        print("Visuell værmelding:", ikon)
+    else:
+        print("Ingen symbolinformasjon tilgjengelig.")
     
     # Sjekk de resterende målingene for nedbør
     regn_check = False 
