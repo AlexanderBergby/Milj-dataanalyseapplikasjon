@@ -22,3 +22,8 @@ Regnsjekk: Skriptet går gjennom de resterende målingene (som dekker de neste 2
 - Visualisering.py
 
 Lager en graf som viser gjennomsnittstemp og max/min område for været siste uken. 
+
+-luftkvalitet.py
+
+Tar inn API som har data for flere ulike AQI (Air quality indekser)
+Lager en graf for no2, pm10, pm25, o3 og en overall AQI, dette er en varsel from fremtidig luftkvalitet
