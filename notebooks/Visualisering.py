@@ -5,97 +5,27 @@ import requests
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from datetime import datetime, timedelta, timezone
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
+import seaborn as sns
+import os
 
-# ------------------------------------
-# 2. Hent værdata via Frost API
-# ------------------------------------
-print("Henter værdata...")
+# Sett Seaborn-tema
+sns.set_theme(style="darkgrid", context="talk")
+filnavn = 'data/weather_data.csv'  # Sørg for at filen ligger i riktig mappe
 
-client_id = "e1e74478-764e-4bac-8a69-f70fe2ed8c6d"
-observations_url = "https://frost.met.no/observations/v0.jsonld"
-valgt_stasjon = "SN68090"  # Trondheim - Granåsen
-temperatur_element = "air_temperature"
-nedbør_element = "sum(precipitation_amount P1D)"
-vindhastighet_element = "wind_speed"
+# Les CSV-filen inn i en DataFrame og konverter 'date'-kolonnen til datetime
+df = pd.read_csv(filnavn, parse_dates=['date'])
+df.set_index('date', inplace=True)
 
-idag = datetime.now(timezone.utc).date()
-start_dato = (idag - timedelta(days=21)).strftime("%Y-%m-%d")  # 21 dager tilbake
-slutt_dato = idag.strftime("%Y-%m-%d")
+# Opprett figur og akse
+fig, ax = plt.subplots(figsize=(12, 6))
 
-params = {
-    "sources": valgt_stasjon,
-    "elements": f"{temperatur_element},{nedbør_element},{vindhastighet_element}",
-    "referencetime": f"{start_dato}/{slutt_dato}"
-}
+# Fyll området mellom min_temp og max_temp
+ax.fill_between(df.index, df['min_temp'], df['max_temp'],
+                color='gray', alpha=0.3, label='Min/Max område')
 
-response = requests.get(observations_url, params=params, auth=(client_id, ""))
-data = response.json()["data"] if response.status_code == 200 else []
-
-temperatur_data, nedbør_data, vind_data = {}, {}, {}
-
-for entry in data:
-    dato = entry["referenceTime"][:10]
-    for obs in entry["observations"]:
-        verdi = obs["value"]
-        element = obs["elementId"]
-        if element == temperatur_element:
-            temperatur_data.setdefault(dato, []).append(verdi)
-        if element == nedbør_element:
-            nedbør_data[dato] = nedbør_data.get(dato, 0) + verdi
-        if element == vindhastighet_element:
-            vind_data.setdefault(dato, []).append(verdi)
-
-weather_rows = []
-for dato in sorted(temperatur_data.keys()):
-    avg_temp = round(np.mean(temperatur_data[dato]), 2)
-    nedbør_mengde = nedbør_data.get(dato, 0)
-    avg_vind = round(np.mean(vind_data[dato]), 2) if dato in vind_data else None
-    weather_rows.append({"date": dato, "avg_temp": avg_temp, "precipitation": nedbør_mengde, "wind_speed": avg_vind})
-
-weather_df = pd.DataFrame(weather_rows)
-weather_df['date'] = pd.to_datetime(weather_df['date']).dt.date
-print("\nVærdata:\n", weather_df.head())
-
-# ------------------------------------
-# 3. Hent historiske NILU-data
-# ------------------------------------
-print("\nHenter historiske luftkvalitetsdata fra NILU...")
-
-nilu_url = "https://api.nilu.no/obs/historical"
-nilu_params = {
-    "components": "PM10,NO2,O3",
-    "stations": "Trondheim",
-    "fromDate": (idag - timedelta(days=21)).strftime("%Y-%m-%d"),
-    "toDate": idag.strftime("%Y-%m-%d")
-}
-
-response = requests.get(nilu_url, params=nilu_params)
-if response.status_code == 200:
-    data = response.json()
-    print(f"Antall NILU-målinger hentet: {len(data)}")
-else:
-    print("Feil ved henting av NILU-data:", response.status_code)
-    data = []
-
-rows = []
-for entry in data:
-    date = entry['fromTime'][:10]
-    component = entry['component']
-    value = entry['value']
-    rows.append({'date': date, 'component': component, 'value': value})
-
-df = pd.DataFrame(rows)
-relevante_komponenter = ['PM10', 'NO2', 'O3']
-df = df[df['component'].isin(relevante_komponenter)]
-
-df_pivot = df.pivot_table(index='date', columns='component', values='value', aggfunc='mean').reset_index()
-df_pivot.columns.name = None
-df_pivot['date'] = pd.to_datetime(df_pivot['date']).dt.date
-print("\nLuftkvalitetsdata fra NILU:\n", df_pivot.head())
+# Plot gjennomsnittstemperaturen med error bars for standardavvik
+ax.errorbar(df.index, df['avg_temp'], yerr=df['std_temp'],
+            fmt='o-', capsize=5, label='Gj.snitt Temp ± Std')
 
 # ------------------------------------
 # 4. Slå sammen data
