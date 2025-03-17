@@ -63,7 +63,7 @@ if response.status_code == 200:  #Sjekker om forespørselen var vellykket
     print("\nVærforhold de siste 7 dagene\n")
     rows = []  #Samler data til CSV
 
-    #Beregn statistikk for hver dag
+    #Beregner statistikk for hver dag
     for dag_nummer, dato in enumerate(sorted(temperatur_data.keys()), 1):
         min_temp = min(temperatur_data[dato])
         max_temp = max(temperatur_data[dato])

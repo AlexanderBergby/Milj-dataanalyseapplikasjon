@@ -44,52 +44,38 @@ if lat is None or lon is None:
     exit()
 
 params = {
-    "lat": lat,   # Latitude
-    "lon": lon    # Longitude
+    "lat": lat,   
+    "lon": lon    
 }
 
 headers = {
     "User-Agent": "MyWeatherApp/1.0 (abergby@gmail.com)"
 }
 
-# Send en GET-forespørsel til API-et
+#Sender en GET-forespørsel til API-et
 response = requests.get(url, params=params, headers=headers)
 
-# Sjekk om responsen var vellykket
+#Sjekker om responsen var vellykket
 if response.status_code == 200:
-    data = response.json() # Konverter JSON til et Python-objekt
+    data = response.json() #Konverterer JSON til et Python-objekt
     
-    # Skriv ut den første målingen
+    #Skriver ut den første målingen
     første = data["properties"]["timeseries"][0]
     print("-" * 40)
     print("Værdata for:", by)
-    print("Tid:", første.get("time", "Ukjent tid")) # Hent ut tidspunktet for målingen, eller "Ukjent tid" hvis det ikke finnes
-    detaljer = første.get("data", {}).get("instant", {}).get("details", {}) # Hent ut detaljene for målingen
-    print("Lufttemperatur:", detaljer.get("air_temperature", "N/A"), "°C") # Hent ut lufttemperatur, eller "N/A" hvis det ikke finnes
-    print("Nedbørsmengde per time:", detaljer.get("precipitation_rate", "N/A"), "mm/h") # Hent ut nedbørsmengde per time, eller "N/A" hvis det ikke finnes
-    print("Relativ luftfuktighet:", detaljer.get("relative_humidity", "N/A"), "%") # Hent ut relativ luftfuktighet, eller "N/A" hvis det ikke finnes
-    print("Vindhastighet:", detaljer.get("wind_speed", "N/A"), "m/s") # Hent ut vindhastighet, eller "N/A" hvis det ikke finnes
-    print("Vindkast:", detaljer.get("wind_speed_of_gust", "N/A"), "m/s") # Hent ut vindkast, eller "N/A" hvis det ikke finnes
-    
-    symbol = første.get("data", {}).get("next_1_hours", {}).get("summary", {}).get("symbol_code", "")
-    if symbol:
-        if "clearsky" in symbol:
-            ikon = "☀️"   # Sol
-        elif "rain" in symbol:
-            ikon = "🌧️"   # Regn
-        elif "cloud" in symbol or "partlycloudy" in symbol:
-            ikon = "☁️"   # Skyet
-        else:
-            ikon = "❓"   # Ukjent vær
-        print("Visuell værmelding:", ikon)
-    else:
-        print("Ingen symbolinformasjon tilgjengelig.")
-    
-    # Sjekk de resterende målingene for nedbør
+    print("Tid:", første.get("time", "Ukjent tid")) #Henter ut tidspunktet for målingen, eller "Ukjent tid" hvis det ikke finnes
+    detaljer = første.get("data", {}).get("instant", {}).get("details", {}) #Henter ut detaljene for målingen
+    print("Lufttemperatur:", detaljer.get("air_temperature", "N/A"), "°C") #Henter ut lufttemperatur, eller "N/A" hvis det ikke finnes
+    print("Nedbørsmengde per time:", detaljer.get("precipitation_rate", "N/A"), "mm/h") #Henter ut nedbørsmengde per time, eller "N/A" hvis det ikke finnes
+    print("Relativ luftfuktighet:", detaljer.get("relative_humidity", "N/A"), "%") #Henter ut relativ luftfuktighet, eller "N/A" hvis det ikke finnes
+    print("Vindhastighet:", detaljer.get("wind_speed", "N/A"), "m/s") #Henter ut vindhastighet, eller "N/A" hvis det ikke finnes
+    print("Vindkast:", detaljer.get("wind_speed_of_gust", "N/A"), "m/s") #Henter ut vindkast, eller "N/A" hvis det ikke finnes
+  
+    #Sjekker de resterende målingene for nedbør
     regn_check = False 
     for entry in data["properties"]["timeseries"][1:]: #Itererer over de resterende målingene
         detaljer_entry = entry.get("data", {}).get("instant", {}).get("details", {})
-        if detaljer_entry.get("precipitation_rate", 0) != 0: # Sjekker om det er nedbør
+        if detaljer_entry.get("precipitation_rate", 0) != 0: #Sjekker om det er nedbør
             regn_check = True
             break
         
