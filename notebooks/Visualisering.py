@@ -6,9 +6,9 @@ import seaborn as sns
 sns.set_theme(style="darkgrid", context="talk")
 
 
-filnavn = 'data/weather_data.csv'  # Sørg for at filen ligger i riktig mappe
+filnavn = 'data/weather_data.csv'
 
-# Les CSV-filen inn i en DataFrame og konverter 'date'-kolonnen til datetime
+# Leser CSV-filen inn i en DataFrame og konverter 'date'-kolonnen til datetime
 df = pd.read_csv(filnavn, parse_dates=['date'])
 df.set_index('date', inplace=True)
 
