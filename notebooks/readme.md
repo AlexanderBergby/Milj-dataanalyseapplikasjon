@@ -18,3 +18,12 @@ Henting av data: Skriptet sender en GET-forespørsel til MET sitt API med posisj
 Første måling: Den første oppføringen i API-responsen (nåværende værdata) skrives ut med detaljert informasjon som lufttemperatur, nedbør, relativ luftfuktighet og vinddata.
 
 Regnsjekk: Skriptet går gjennom de resterende målingene (som dekker de neste 2 timene) og sjekker om precipitation_rate er ulik 0. Hvis minst én måling indikerer nedbør, skrives det ut at det kommer regn; ellers vises en melding om at det ikke blir regn.
+
+- Visualisering.py
+
+Lager en graf som viser gjennomsnittstemp og max/min område for været siste uken. 
+
+-luftkvalitet.py
+
+Tar inn API som har data for flere ulike AQI (Air quality indekser)
+Lager en graf for no2, pm10, pm25, o3 og en overall AQI, dette er en varsel from fremtidig luftkvalitet
