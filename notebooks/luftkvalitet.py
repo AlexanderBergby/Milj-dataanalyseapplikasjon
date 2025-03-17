@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import matplotlib.dates as mdates
 
-# Definer API og parametere
+#Definere API og parametere
 url = "https://api.met.no/weatherapi/airqualityforecast/0.1/"
 params = {
     "lat": 60,
@@ -14,7 +14,7 @@ params = {
 }
 headers = {"User-Agent": "MyAirQualityApp/1.0 (westersjoserina@gmail.com)"}
 
-# Hent data fra API-en
+#Henter data fra API-en
 response = requests.get(url, params=params, headers=headers)
 if response.status_code != 200:
     print("Feil ved henting av data:", response.status_code)

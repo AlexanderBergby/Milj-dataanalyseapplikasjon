@@ -19,7 +19,7 @@ def get_weather_data(lat, lon):
         return None
 
 def create_weather_window(by, data):
-    # Hent den første målingen
+    #Henter den første målingen
     første = data["properties"]["timeseries"][0]
     time_text = første.get("time", "Ukjent tid")
     details = første.get("data", {}).get("instant", {}).get("details", {})
@@ -29,26 +29,26 @@ def create_weather_window(by, data):
     wind_speed = details.get("wind_speed", "N/A")
     wind_gust = details.get("wind_speed_of_gust", "N/A")
     
-    # Hent ut vær-symbolet for de neste 1 time (om tilgjengelig)
+    #Finner vær-symbolet for dem neste time
     symbol = første.get("data", {}).get("next_1_hours", {}).get("summary", {}).get("symbol_code", "")
     if symbol:
         if "clearsky" in symbol:
-            ikon = "☀️"   # Sol
+            ikon = "☀️" 
         elif "rain" in symbol:
-            ikon = "🌧️"   # Regn
+            ikon = "🌧️" 
         elif "cloud" in symbol or "partlycloudy" in symbol:
-            ikon = "☁️"   # Skyet
+            ikon = "☁️"
         else:
-            ikon = "❓"   # Ukjent vær
+            ikon = "❓"
     else:
         ikon = "❓"
     
-    # Opprett et nytt Tkinter-vindu
+    #Oppretter et Tkinter-vindu
     root = tk.Tk()
     root.title("Værmelding for " + by)
     root.geometry("400x350")
     
-    # Lag etiketter for å vise værdataene
+    #Lager etiketter for å vise værdataene
     label_title = tk.Label(root, text="Værmelding for: " + by, font=("Helvetica", 16, "bold"))
     label_title.pack(pady=10)
     
