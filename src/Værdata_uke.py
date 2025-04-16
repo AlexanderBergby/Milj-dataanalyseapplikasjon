@@ -3,8 +3,7 @@ import numpy as np
 from datetime import datetime, timedelta #for å kunne enklere behandle og visualisere dato og tid
 import pandas as pd  #for å kunne lagre til CSV til sendere databehandling
 import numpy as np  #for å regne ut median og standardavvik
-import matplotlib.pyplot as plt
-import seaborn as sns
+
 import os
 
 #sjekker at data-mappen finnes
