@@ -3,8 +3,7 @@ import numpy as np
 from datetime import datetime, timedelta #for å kunne enklere behandle og visualisere dato og tid
 import pandas as pd  #for å kunne lagre til CSV til sendere databehandling
 import numpy as np  #for å regne ut median og standardavvik
-import matplotlib.pyplot as plt
-import seaborn as sns
+
 import os
 
 #sjekker at data-mappen finnes
@@ -63,7 +62,7 @@ if response.status_code == 200:  #Sjekker om forespørselen var vellykket
     print("\nVærforhold de siste 7 dagene\n")
     rows = []  #Samler data til CSV
 
-    #Beregn statistikk for hver dag
+    #Beregner statistikk for hver dag
     for dag_nummer, dato in enumerate(sorted(temperatur_data.keys()), 1):
         min_temp = min(temperatur_data[dato])
         max_temp = max(temperatur_data[dato])

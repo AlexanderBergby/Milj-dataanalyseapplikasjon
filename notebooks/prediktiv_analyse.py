@@ -1,1 +1,0 @@
-#her kommer det noe bra etterhvert, gled dere:)
