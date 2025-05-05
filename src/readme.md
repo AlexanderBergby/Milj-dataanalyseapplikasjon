@@ -36,3 +36,7 @@ Dette scriptet tar inn en API, lagrer data for de siste 7 dagene til tre element
 
     Bruker en lineær regresjonsmodell for å predikere gjennomsnittstemperatur basert på vindhastighet og nedbør ved å benytte data fra værdata lagret i CSV_filen
     Nåværende resultater (RMSE = 4.6, som angir gjennomsnittlig avvik mellom modellens prediksjoner og de faktiske verdiene, og R^2-score = -10,32, som viser hvor godt modellen fanger variasjoner i dataen) er prediksjonen veldig dårlig nå. Mtp på at værdataene varierer fra ca -0.5 til 14 grader er avviket på 4.6 veldig høyt. Vi håper derfor med videre utvikling der vi skal ta inn mange flere data at prediksjonen blir bedre
+
+- Interaktiv
+
+    Bruker funksjonen definert i værdata_nå til å hente temperaturen til norges 5 største byer. Disse er blitt lagret i en json fil i data-mappen. Vi bruker Plotly Express med scatter_geo() sammen med spesifikasjonen scope="europe" for å vise et Europakart og json filen med temperaturen for å visuelt vise tempraturen pent. 

@@ -33,8 +33,8 @@ fig_geo = px.scatter_geo(
     color='temperature',
     color_continuous_scale='RdYlBu_r',
     projection="natural earth",
-    custom_data=['city', 'temperature'],  # ✅ Bare disse sendes til hover
-    title='🌡️ Temperatur i store norske byer'
+    custom_data=['city', 'temperature'],  #Bare disse sendes til hover
+    title='Temperatur i store norske byer'
 )
 
 # Vi lager vårt eget hovertemplate
