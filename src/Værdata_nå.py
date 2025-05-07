@@ -2,55 +2,38 @@ import requests
 import json
 import os
 
+#API
 url = "https://api.met.no/weatherapi/nowcast/2.0/complete"
 headers = {
     "User-Agent": "MyWeatherApp/1.0 (abergby@gmail.com)"
 }
 
-def meny():
-    print("Velkommen til værappen!")
-    print("1. Sjekk været i Trondheim")
-    print("2. Sjekk været i Oslo")
-    print("3. Sjekk været i Bergen")
-    print("4. Sjekk været i Stavanger")
-    print("5. Sjekk været i Tromsø")
+#Meny for valg av by
+def velg_by():
+    print("1. Trondheim")
+    print("2. Oslo")
+    print("3. Bergen")
+    print("4. Stavanger")
+    print("5. Tromsø")
     print("6. Avslutt")
 
     while True:
         valg = input("Velg et alternativ: ")
         if valg == "1":
-            lat = 63.4308
-            lon = 10.4034
-            by = "Trondheim"
-            break
+            return 63.4308, 10.4034, "Trondheim"
         elif valg == "2":
-            lat = 59.9139
-            lon = 10.7522
-            by = "Oslo"
-            break
+            return 59.9139, 10.7522, "Oslo"
         elif valg == "3":
-            lat = 60.3913
-            lon = 5.3221
-            by = "Bergen"
-            break
+            return 60.3913, 5.3221, "Bergen"
         elif valg == "4":
-            lat = 58.9690
-            lon = 5.7331
-            by = "Stavanger"
-            break
+            return 58.9690, 5.7331, "Stavanger"
         elif valg == "5":
-            lat = 69.6496
-            lon = 18.9560
-            by = "Tromsø"
-            break
+            return 69.6496, 18.9560, "Tromsø"
         elif valg == "6":
             print("Ha en fin dag!")
             return None, None, None
         else:
             print("Ugyldig valg. Prøv igjen.")
-
-    return lat, lon, by
-
 
 def lagre_temperaturdata(filbane="data/temperaturdata.json"):
     byer = {
@@ -66,7 +49,7 @@ def lagre_temperaturdata(filbane="data/temperaturdata.json"):
     for by_navn, (lat, lon) in byer.items():
         params = {"lat": lat, "lon": lon}
         response = requests.get(url, params=params, headers=headers)
-        
+
         if response.status_code == 200:
             data = response.json()
             detaljer = data["properties"]["timeseries"][0]["data"]["instant"]["details"]
@@ -88,18 +71,17 @@ def lagre_temperaturdata(filbane="data/temperaturdata.json"):
 
     print(f"Temperaturdata lagret i: {filbane}")
 
-
-if __name__ == "__main__":
-    lat, lon, by = meny()
+def værdata_nå():
+    lat, lon, by = velg_by()
     if lat is None or lon is None:
-        exit()
+        return
 
     params = {"lat": lat, "lon": lon}
     response = requests.get(url, params=params, headers=headers)
 
     if response.status_code == 200:
         data = response.json()
-        
+
         første = data["properties"]["timeseries"][0]
         print("-" * 40)
         print("Værdata for:", by)
@@ -111,13 +93,11 @@ if __name__ == "__main__":
         print("Vindhastighet:", detaljer.get("wind_speed", "N/A"), "m/s")
         print("Vindkast:", detaljer.get("wind_speed_of_gust", "N/A"), "m/s")
 
-        regn_check = False 
-        for entry in data["properties"]["timeseries"][1:]:
-            detaljer_entry = entry.get("data", {}).get("instant", {}).get("details", {})
-            if detaljer_entry.get("precipitation_rate", 0) != 0:
-                regn_check = True
-                break
-            
+        regn_check = any(
+            entry.get("data", {}).get("instant", {}).get("details", {}).get("precipitation_rate", 0) != 0
+            for entry in data["properties"]["timeseries"][1:3]
+        )
+
         if regn_check:
             print("Det kommer til å bli regn de neste 2 timene.")
         else:
@@ -127,3 +107,7 @@ if __name__ == "__main__":
         print("Feil under henting av data. Statuskode:", response.status_code)
 
     lagre_temperaturdata()
+
+#For testing
+if __name__ == "__main__":
+    værdata_nå()
