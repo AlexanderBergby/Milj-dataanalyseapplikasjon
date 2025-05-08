@@ -1,5 +1,7 @@
 import sys
 import os
+import tkinter as tk
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
 from Værdata_nå import værdata_nå
