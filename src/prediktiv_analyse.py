@@ -5,6 +5,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 import tkinter as tk
 from tkinter import messagebox
 
+
 def prediktiv():
     #Sier hvilken data som skal brukes
     data = "data/weather_data.csv"
@@ -14,6 +15,7 @@ def prediktiv():
     except FileNotFoundError:
         messagebox.showerror("Feil", f"Filen '{data}' finnes ikke.\nKjør alternativ 2 først for å hente værdata.")
         return
+    
     # Sjekk at nødvendige kolonner finnes
     if not {'wind_speed', 'precipitation', 'avg_temp'}.issubset(df.columns):
         messagebox.showerror("Feil", "Datasettet mangler nødvendige kolonner for prediktiv analyse.")
