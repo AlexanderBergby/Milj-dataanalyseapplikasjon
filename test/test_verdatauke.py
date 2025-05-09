@@ -2,6 +2,7 @@ import unittest
 import os
 import pandas as pd
 import sys
+from unittest.mock import patch
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 from Verdata_uke import værdata_uke
@@ -25,6 +26,12 @@ class TestVærdataUkeMinimal(unittest.TestCase):
 
         self.assertTrue(forventede_kolonner.issubset(df.columns))
         self.assertGreaterEqual(len(df), 1)
+
+    #Negativ test med en "mock"fil
+    @patch("pandas.DataFrame.to_csv", side_effect=OSError("Kan ikke lagre fil"))
+    def test_feil_ved_lagring(self, mock_csv):
+        with self.assertRaises(OSError):
+            værdata_uke()
 
 if __name__ == "__main__":
     unittest.main()
