@@ -1,6 +1,6 @@
 import requests
 import numpy as np
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 import pandas as pd
 import os
 import tkinter as tk
@@ -22,7 +22,7 @@ def værdata_uke():
     vindhastighet_element = "wind_speed"
 
     #Beregn datoer for de siste 7 dagene
-    idag = datetime.utcnow().date()
+    idag = datetime.now(UTC).date()
     start_dato = (idag - timedelta(days=7)).strftime("%Y-%m-%d")
     slutt_dato = idag.strftime("%Y-%m-%d")
 

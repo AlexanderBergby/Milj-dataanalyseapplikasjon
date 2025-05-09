@@ -5,7 +5,7 @@ import tkinter as tk
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
 from Værdata_nå import værdata_nå
-from Værdata_uke import værdata_uke
+from Verdata_uke import værdata_uke
 from Værdata_nå_visuell import værdata_nå_visuell
 from Visualisering import visualisering
 from prediktiv_analyse import prediktiv

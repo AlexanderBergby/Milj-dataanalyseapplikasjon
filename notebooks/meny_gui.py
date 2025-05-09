@@ -4,8 +4,8 @@ import os
 from PIL import Image, ImageTk
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
-from værdatavisuell_nå import værdata_nå_visuell
-from Værdata_uke import værdata_uke
+from verdatavisuell_na import værdata_nå_visuell
+from Verdata_uke import værdata_uke
 from Visualisering import visualisering
 from prediktiv_analyse import prediktiv
 from luftkvalitet import luftkvalitet
