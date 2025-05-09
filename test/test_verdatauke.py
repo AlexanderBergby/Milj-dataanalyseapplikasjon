@@ -26,8 +26,5 @@ class TestVærdataUkeMinimal(unittest.TestCase):
         self.assertTrue(forventede_kolonner.issubset(df.columns))
         self.assertGreaterEqual(len(df), 1)
 
-        #Rydder opp
-        os.remove(filnavn)
-
 if __name__ == "__main__":
     unittest.main()
