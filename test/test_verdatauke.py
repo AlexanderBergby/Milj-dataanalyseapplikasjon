@@ -9,7 +9,7 @@ from Verdata_uke import værdata_uke
 
 class TestVærdataUkeMinimal(unittest.TestCase):
     def test_weather_data_csv_innhold(self):
-        filnavn = "data/weather_data.csv"
+        filnavn = "data/csv/weather_data.csv"
 
         #Kjører funksjonen som genererer CSV
         værdata_uke()

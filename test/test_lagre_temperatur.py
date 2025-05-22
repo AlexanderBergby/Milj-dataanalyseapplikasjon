@@ -9,7 +9,7 @@ from verdatavisuell_na import lagre_temperaturdata
 
 class TestWeatherData(unittest.TestCase):
     def test_lagre_temperaturdata_oppretter_fil(self):
-        test_fil = "data/test_temperatur.json"
+        test_fil = "data/json/test_temperatur.json"
         lagre_temperaturdata(test_fil)
 
         #Sjekker at filen faktisk ble opprettet.

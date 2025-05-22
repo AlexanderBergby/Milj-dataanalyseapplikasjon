@@ -32,19 +32,8 @@ def visualisering():
     ax1.set_ylabel('Temperatur (°C)')
     ax1.legend()
     plt.setp(ax1.get_xticklabels(), rotation=25)
-    #Sammenheng mellom gjennomsnittstemperatur og vindhastighet
-    fig2, ax2 = plt.subplots(figsize=(12, 6))
-    korrelasjon = df["avg_temp"].corr(df["wind_speed"])
-    fig2.text(0.05, 0.95, f"Korrelasjon: {korrelasjon:.2f}", transform=plt.gca().transAxes,
-             fontsize=12, verticalalignment='top',
-             bbox=dict(facecolor='white', alpha=0.5, edgecolor='none'))
-    
-    sns.scatterplot(data=df, x='avg_temp', y='wind_speed', ax=ax2)
-    ax2.set_title('Sammenheng mellom gjennomsnittstemperatur og vindhastighet')
-    ax2.set_xlabel('Gjennomsnittstemperatur (°C)')
-    ax2.set_ylabel('Vindhastighet (m/s)')
-
     plt.show()
+
 
 #For testing
 if __name__ == "__main__":
