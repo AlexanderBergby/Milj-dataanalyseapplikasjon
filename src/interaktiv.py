@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 import plotly.express as px
-from Værdata_nå import lagre_temperaturdata
+from verdatavisuell_na import lagre_temperaturdata
 
 def interaktiv():
     #Oppdaterer temperaturdata som ligger i værdata_nå-filen
