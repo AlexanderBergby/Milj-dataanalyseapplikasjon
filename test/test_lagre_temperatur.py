@@ -13,7 +13,7 @@ class TestWeatherData(unittest.TestCase):
         lagre_temperaturdata(test_fil)
 
         #Sjekker at filen faktisk ble opprettet.
-        self.assertTrue(os.path.exists(test_fil)) #
+        self.assertTrue(os.path.exists(test_fil))
         with open(test_fil, "r") as f:
             data = json.load(f)
         #Sjekker at dataen er en liste.
