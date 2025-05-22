@@ -35,7 +35,7 @@ def velg_by():
         else:
             print("Ugyldig valg. Prøv igjen.")
 
-def lagre_temperaturdata(filbane="data/temperaturdata.json"):
+def lagre_temperaturdata(filbane="data/json/temperaturdata.json"):
     byer = {
         "Oslo": (59.9139, 10.7522),
         "Bergen": (60.3913, 5.3221),

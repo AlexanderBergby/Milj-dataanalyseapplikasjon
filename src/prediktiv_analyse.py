@@ -8,7 +8,7 @@ from tkinter import messagebox
 
 def prediktiv():
     #Sier hvilken data som skal brukes
-    data = "data/weather_data.csv"
+    data = "data/csv/weather_data.csv"
 
     try:
         df = pd.read_csv(data)

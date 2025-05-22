@@ -9,10 +9,10 @@ def interaktiv():
 
     #Laster inn temperaturdata
     try:
-        with open("data/temperaturdata.json", "r") as f:
+        with open("data/json/temperaturdata.json", "r") as f:
             temp_data = json.load(f)
     except FileNotFoundError:
-        print("Filen 'data/temperaturdata.json' finnes ikke.")
+        print("Filen 'data/json/temperaturdata.json' finnes ikke.")
         return
 
     df = pd.DataFrame(temp_data)

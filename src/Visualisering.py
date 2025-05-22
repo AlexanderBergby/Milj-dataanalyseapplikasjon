@@ -6,7 +6,7 @@ import seaborn as sns
 sns.set_theme(style="darkgrid", context="talk")
 
 def visualisering():
-    filnavn = 'data/weather_data.csv'
+    filnavn = 'data/csv/weather_data.csv'
 
     #Leser CSV-filen inn i en DataFrame og konverter 'date'-kolonnen til datetime
     try:

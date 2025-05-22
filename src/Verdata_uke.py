@@ -64,6 +64,7 @@ def værdata_uke():
     output_text = "Værforhold - Trondheim (Granåsen)\n\n"
 
     #Beregner statistikk for hver dag
+    #FORKLAR MEDIAN OG SATNDARDAVVIK
     for dag_nummer, dato in enumerate(sorted(temperatur_data.keys()), 1):
         min_temp = min(temperatur_data[dato])
         max_temp = max(temperatur_data[dato])
@@ -97,7 +98,7 @@ def værdata_uke():
 
     #Lager DataFrame og lagrer til CSV
     df = pd.DataFrame(rows)
-    filnavn = "data/weather_data.csv"
+    filnavn = "data/csv/weather_data.csv"
     df.to_csv(filnavn, index=False)
 
     #GUI-visning
