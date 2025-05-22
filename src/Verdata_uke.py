@@ -97,7 +97,7 @@ def værdata_uke():
 
     #Lager DataFrame og lagrer til CSV
     df = pd.DataFrame(rows)
-    filnavn = "data/weather_data.csv"
+    filnavn = "data/csv/weather_data.csv"
     df.to_csv(filnavn, index=False)
 
     #GUI-visning

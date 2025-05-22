@@ -57,7 +57,7 @@ def create_weather_window(by, data):
     tk.Label(vindu, text=ikon, font=("Helvetica", 48)).pack(pady=10)
 
 #Lagrer temperaturdata for alle 5 byer
-def lagre_temperaturdata(filbane="data/temperaturdata.json"):
+def lagre_temperaturdata(filbane="data/json/temperaturdata.json"):
     byer = {
         "Oslo": (59.9139, 10.7522),
         "Bergen": (60.3913, 5.3221),
