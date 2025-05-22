@@ -22,7 +22,9 @@ for kol in ['Maksimumstemperatur (mnd)', 'Minimumstemperatur (mnd)']:
 
     # Konverter til flyttall (float)
     df[kol] = df[kol].astype(float)
-
+    
+# Leser ikke siste rad i dataene
+df = df.iloc[:-1]   
 
 # Kun for å illustrere at det er NaN i dataene, og sjekker at rensingen er gjort riktig
 for index in range(len(df)):
@@ -30,22 +32,42 @@ for index in range(len(df)):
     max_value = df['Maksimumstemperatur (mnd)'][index]
 
     # Sjekker om det er NaN i dataene
-    if pd.isna(min_value) or pd.isna(max_value):
-        print("NaN i: ", index)
-        print("Maksimumstemperatur (mnd):", max_value)
+    if pd.isna(min_value):
+        print("Feil i rad nr: ", index + 2) # +2 fordi første rad er header, og pandas starter på 0
         print("Minimumstemperatur (mnd):", min_value)
 
-        # Hvis det ikke er den første raden, skriv ut verdiene fra forrige rad
-        if index > 0:
+        # Sjekker at det eksister forrige og neste rad og printer ut verdiene
+        if index > 0 and index < len(df) - 1:
+            interpolert_verdi = (df['Minimumstemperatur (mnd)'][index - 1] + df['Minimumstemperatur (mnd)'][index + 1]) / 2
+            print("Forrige rad verdi:")
+            print("  Minimumstemperatur (mnd):", df['Minimumstemperatur (mnd)'][index - 1])
+            print("\n")
+            print("Neste rad verdi:")
+            print("  Minimumstemperatur (mnd):", df['Minimumstemperatur (mnd)'][index + 1])
+            print("Den nye verdien blir: ", interpolert_verdi)
+        else:
+            print("Ingen forrige eller neste rad å sammenligne med.")
+    
+
+        print("-" * 40)
+
+    if pd.isna(max_value):
+        print("Feil i rad nr: ", index + 2) # +2 fordi første rad er header, og pandas starter på 0
+        print("Maksimumstemperaturen (mnd):", min_value)
+
+        # Sjekker at det eksister forrige og neste rad og printer ut verdiene
+        if index > 0 and index < len(df) - 1:
+            print("Maksimumstemperatur (mnd):", max_value)
+            interpolert_verdi = (df['Maksimumstemperatur (mnd)'][index - 1] + df['Maksimumstemperatur (mnd)'][index + 1]) / 2
             print("Forrige rad verdi:")
             print("  Maksimumstemperatur (mnd):", df['Maksimumstemperatur (mnd)'][index - 1])
-            print("  Minimumstemperatur (mnd):", df['Minimumstemperatur (mnd)'][index - 1])
-
-        # Hvis det ikke er den siste raden, skriv ut verdiene fra neste rad
-        if index < len(df) - 1:
+            print("\n")
             print("Neste rad verdi:")
             print("  Maksimumstemperatur (mnd):", df['Maksimumstemperatur (mnd)'][index + 1])
-            print("  Minimumstemperatur (mnd):", df['Minimumstemperatur (mnd)'][index + 1])
+            print("Den nye verdien blir: ", interpolert_verdi)
+        else:
+            print("Ingen forrige eller neste rad å sammenligne med.")
+    
 
         print("-" * 40)
 
