@@ -20,7 +20,7 @@ fig.add_trace(
         y=df['Minimumstemperatur (mnd)'], 
         name='Minimum'))
 
-# Sett tittel og x-akse med range slider og selectors (lik eksempelkoden)
+#Sett tittel og x-akse med range slider og selectors (lik eksempelkoden)
 fig.update_layout(
     title_text="Månedlig maksimums- og minimumstemperatur",
     xaxis=dict(

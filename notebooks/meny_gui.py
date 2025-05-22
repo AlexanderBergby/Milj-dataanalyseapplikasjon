@@ -18,7 +18,7 @@ def start_gui():
     root.resizable(False, False)
 
     #Bakgrunn
-    image_path = "docs/bakgrunn3.jpg"
+    image_path = "recources/bakgrunn3.jpg"
     bakgrunn = Image.open(image_path).resize((600, 600))
     bg_image = ImageTk.PhotoImage(bakgrunn)
     tk.Label(root, image=bg_image).place(x=0, y=0, relwidth=1, relheight=1)
