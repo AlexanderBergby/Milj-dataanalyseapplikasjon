@@ -8,7 +8,7 @@ df['Date'] = pd.to_datetime(df['Date'])
 # Oppretter figur
 fig = go.Figure()
 
-# Legg til begge temperaturserier
+# Legger til maksimums- og minimumstemperatur som scatter plots
 fig.add_trace(
     go.Scatter(
         x=df['Date'], 
@@ -20,7 +20,7 @@ fig.add_trace(
         y=df['Minimumstemperatur (mnd)'], 
         name='Minimum'))
 
-#Sett tittel og x-akse med range slider og selectors (lik eksempelkoden)
+# Setter tittel og x-akse med range slider og knapper (lik eksempelkoden fra Plotly)
 fig.update_layout(
     title_text="Månedlig maksimums- og minimumstemperatur",
     xaxis=dict(
