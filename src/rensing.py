@@ -9,7 +9,6 @@ def rens_tempdata():
         encoding='utf-8-sig',
         dtype={'Tid(norsk normaltid)': str}
     )
-    df['Date'] = pd.to_datetime(df['Tid(norsk normaltid)'], format='%m.%Y')
 
     # Renser data, endrer ',' til '.' (Må gjøre for å bruke pandas) og '-' til NaN, og konverterer til float
     for kol in ['Maksimumstemperatur (mnd)', 'Minimumstemperatur (mnd)']:
@@ -26,7 +25,8 @@ def rens_tempdata():
     # Leser ikke siste rad i dataene
     df = df.iloc[:-1]   
 
-    # Kun for å illustrere at det er NaN i dataene, og sjekker at rensingen er gjort riktig
+    # Kun for å illustrere at det er NaN i dataene, og sjekker at rensingen er gjort riktig, har ingen funksjon utenom å visualisere.
+    # Hvis det er NaN i første eller siste rad, så kan det ikke interpoleres, men pandas vil da bare sette NaN i stedet for å gi feil.
     for index in range(len(df)):
         min_value = df['Minimumstemperatur (mnd)'][index]
         max_value = df['Maksimumstemperatur (mnd)'][index]
@@ -68,14 +68,11 @@ def rens_tempdata():
             else:
                 print("Ingen forrige eller neste rad å sammenligne med.")
 
-
             print("-" * 40)
 
     # Interpolerer NaN-verdier i 'Maksimumstemperatur (mnd)' og 'Minimumstemperatur (mnd)' kolonnene
     for kol in ['Maksimumstemperatur (mnd)', 'Minimumstemperatur (mnd)']:
         df[kol] = df[kol].interpolate(method='linear')
 
-
-
-
+    #Lagrer dataene i en ny CSV-fil
     df.to_csv('data/csv/renset_tempdata_Theim.csv', sep=';', index=False, encoding='utf-8-sig')
