@@ -10,10 +10,26 @@ from Visualisering import visualisering
 from prediktiv_analyse import prediktiv
 from luftkvalitet import luftkvalitet
 from interaktiv import interaktiv
+from Stor_visuell_midlertidig import vis_temperaturgraf
 
+#For å komibinere en meny til verdata_uke og visualisering
+def åpne_væranalysemeny():
+    vindu = tk.Toplevel()
+    vindu.title("Værdata for Trondheim - forrgje uke")
+    vindu.geometry("400x300")
+    vindu.resizable(False, False)
+
+    tk.Label(vindu, text="Velg format:", font=("Helvetica", 14, "bold")).pack(pady=20)
+
+    tk.Button(vindu, text="Værdata tekstbasert", width=40, height=2, command=værdata_uke).pack(pady=10)
+    tk.Button(vindu, text="Figur med temperaturutvikling og statistikk", width=40, height=2, command=visualisering).pack(pady=10)
+
+    tk.Button(vindu, text="Lukk", command=vindu.destroy).pack(pady=30)
+
+#Start appen
 def start_gui():
     root = tk.Tk()
-    root.title("Værapp - Hovedmeny")
+    root.title("Værappen - Vær så god")
     root.geometry("600x600")
     root.resizable(False, False)
 
@@ -26,12 +42,12 @@ def start_gui():
     tk.Label(root, text="Velkommen til værappen!", font=("Helvetica", 20, "bold"), bg="white").pack(pady=20)
 
     menyvalg = [
-        ("1 - Værdata nå", lambda: værdata_nå_visuell(root)),
-        ("2 - Værdata uke", værdata_uke),
-        ("3 - Visualisering", visualisering),
-        ("4 - Prediktiv analyse", prediktiv),
-        ("5 - Luftkvalitet", luftkvalitet),
-        ("6 - Interaktiv visning", interaktiv)
+        ("1 - Værmelding - Norske byer", lambda: værdata_nå_visuell(root)),
+        ("2 - Værdata for Trondheim", åpne_væranalysemeny),
+        ("3 - Prediktiv analyse", prediktiv),
+        ("4 - Luftkvalitet", luftkvalitet),
+        ("5 - Interaktiv visning", interaktiv), 
+        ("6 - Temperatur siste 10 årene", vis_temperaturgraf)
     ]
 
     for tekst, funksjon in menyvalg:
