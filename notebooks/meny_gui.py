@@ -3,14 +3,22 @@ import sys
 import os
 from PIL import Image, ImageTk
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
-
+from rensing import rens_tempdata
 from verdatavisuell_na import værdata_nå_visuell
 from Verdata_uke import værdata_uke
 from Visualisering import visualisering
 from prediktiv_analyse import prediktiv
 from luftkvalitet import luftkvalitet
 from interaktiv import interaktiv
-from Stor_visuell_midlertidig import vis_temperaturgraf
+from verdata_10_aar import vis_temperaturgraf
+
+#Renser data før meny visning.
+filnavn = "data/csv/renset_tempdata_Theim.csv"
+#Sjekker om filen eksisterer
+if not os.path.exists(filnavn):
+    rens_tempdata()
+else:
+    print(f"Filen '{filnavn}' eksisterer allerede. Ingen rensing nødvendig.")
 
 #For å komibinere en meny til verdata_uke og visualisering
 def åpne_væranalysemeny():
