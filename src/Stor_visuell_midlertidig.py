@@ -1,42 +1,43 @@
 import pandas as pd
 import plotly.graph_objects as go
 
-# Leser inn data
-df = pd.read_csv('data/csv/renset_tempdata_Theim.csv', sep=';', encoding='utf-8-sig')
-df['Date'] = pd.to_datetime(df['Date'])
+def vis_temperaturgraf():
+    # Leser inn data
+    df = pd.read_csv('data/csv/renset_tempdata_Theim.csv', sep=';', encoding='utf-8-sig')
+    df['Date'] = pd.to_datetime(df['Date'])
 
-# Oppretter figur
-fig = go.Figure()
+    # Oppretter figur
+    fig = go.Figure()
 
-# Legger til maksimums- og minimumstemperatur som scatter plots
-fig.add_trace(
-    go.Scatter(
-        x=df['Date'], 
-        y=df['Maksimumstemperatur (mnd)'], 
-        name='Maksimum'))
-fig.add_trace(
-    go.Scatter(
-        x=df['Date'], 
-        y=df['Minimumstemperatur (mnd)'], 
-        name='Minimum'))
+    # Legger til maksimums- og minimumstemperatur som scatter plots
+    fig.add_trace(
+        go.Scatter(
+            x=df['Date'], 
+            y=df['Maksimumstemperatur (mnd)'], 
+            name='Maksimum'))
+    fig.add_trace(
+        go.Scatter(
+            x=df['Date'], 
+            y=df['Minimumstemperatur (mnd)'], 
+            name='Minimum'))
 
-# Setter tittel og x-akse med range slider og knapper (lik eksempelkoden fra Plotly)
-fig.update_layout(
-    title_text="Månedlig maksimums- og minimumstemperatur",
-    xaxis=dict(
-        rangeselector=dict(
-            buttons=list([
-                dict(count=1, label="1 år", step="year", stepmode="backward"),
-                dict(count=5, label="5 år", step="year", stepmode="backward"),
-                dict(step="all", label="Alt")
-            ])
+    # Setter tittel og x-akse med range slider og knapper (lik eksempelkoden fra Plotly)
+    fig.update_layout(
+        title_text="Månedlig maksimums- og minimumstemperatur",
+        xaxis=dict(
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=1, label="1 år", step="year", stepmode="backward"),
+                    dict(count=5, label="5 år", step="year", stepmode="backward"),
+                    dict(step="all", label="Alt")
+                ])
+            ),
+            rangeslider=dict(visible=True),
+            type="date"
         ),
-        rangeslider=dict(visible=True),
-        type="date",
-        
-    ),
-    yaxis=dict(title='Temperatur (°C)'),
-    hovermode='x unified',
-)
+        yaxis=dict(title='Temperatur (°C)'),
+        hovermode='x unified'
+    )
 
-fig.show()
+    fig.show()
+
