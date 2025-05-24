@@ -54,7 +54,7 @@ def luftkvalitet():
     df.set_index("Time", inplace=True)
 
 #Bruker Matplotlib og Seaborn for plotting
-    sns.set(style="whitegrid")
+    sns.set_theme(style="whitegrid")
     plt.figure(figsize=(12, 6))
     plt.plot(df.index, df["AQI"], marker='o', label="AQI")
     plt.plot(df.index, df["AQI_no2"], marker='o', label="NO2")
