@@ -105,7 +105,3 @@ def prediktiv():
     plt.legend()
     plt.tight_layout()
     plt.show()
-<<<<<<< HEAD
-
-=======
->>>>>>> Serina
