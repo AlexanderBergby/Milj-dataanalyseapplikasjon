@@ -1,35 +1,40 @@
 # Milj-dataanalyseapplikasjon
-Prosjekt TDT4114, miljødataanalyseapplikasjon
+Prosjekt TDT4114, miljødataanalyseapplikasjon, Gruppe 107
 
-Del 1: Datainnsamling og forberedelse
+Dette er Python-program som samler inn, analyserer og visualiserer vær- og miljødata, med et grafisk brukergrensesnitt (GUI) laget i Tkinter. Programmet gjør det enkelt å hente sanntidsvær, vise statistikk for siste uke, lage interaktive grafer og utføre enkel prediktiv analyse – alt via en brukervennlig meny.
 
-Oppgave 1: I oppgave 1 lagde gruppen et felles Repo, hvor vi har laget oss en Main og to individuelle branches kalt "Serina" og "Alex". 
-
-Oppgave 2: Datainnsamling
-Gruppen valgte å bruke "Metrologisk institutt" sin API. Gruppen så igjennom ulike altarnativer for datainnsamlingsnettsider hvor de viktigste kriteriene var: 
-- Tilgjengelighet
-- Kvalitet 
-- Pålitelighet
-
-Gruppen anser MET til å være både svært pålitelighet og av god kvalitet. 
-
-Dataen som ble hentet fra denne API-en er:
-- Temperatur
-- Nedbør
-- Vindhastighet
-
-Oppgave 3: Databehandling
-
-Gruppen har brukt pandas for å lagre data i en csv fil for å senere bruke dette i visualisering av dataen. 
-
-Gruppen kan forvente outliers (-50 eller +50 pga f.eks skrivefeil), manglende data eller inkonsekvente enheter (km/t eller m/s).
-I fremtidig behandling av dataen (innlevering av del 2) kan vi bruke:
-- sette logiske grenser for temp
-- df.isnull().sum() for å se antall manglende verdier (NaN) i hver kolonne.
-- videre kan vi bruke dropna/fillna/interpolate for å fylle manglende data
-
-List comprehensions:
-- Kan integreres for å sjekke og rette opp i inkonsekvente enheter.
+Mappestrukturen vår seg følgende ut: 
+Milj-dataanalyseapplikasjon/
+├── data/                #Rådata og analyserte data (CSV/JSON)
+├── docs/                #Viktige dokumenter (pdf og md)
+├── resources/           #Bakgrunnsbilde brukt i GUI-menyen
+├── src/                 #All kode og hovedmeny (meny_gui.py)
+├── test/                #Enhetstester for ulike funksjoner
+├──.gitignore            #gitignore fil
+├──README.md             #denne filen
+└── requirements.txt     #pakker/krav til å kunne kjøre koden
+Alle mappene inneholder egen readme.md med beskrivelse av mappens innhold.
 
 
+Det er to ulike metoder for å kjøre programmet vårt:
+1.  Skriv inn følgene i terminalen:
+python3 src/meny_gui.py
+
+2. Kjør koden meny_gui.py, som ligger i src mappen.
+
+En beskrivelse av menyen og dens innhold: 
+"1 - Værmelding-Norske byer" 
+Henter sanntidsdata for de 5 største byene i Norge.
+(Bruk av API)
+"2 - Værdata for Trondheim"
+Viser værmelding for Trondheim for de siste 7 dagene som både tekst og figur. 
+(Bruk av API)
+"3 - Prediktiv analyse"
+Enkel værprediksjon for makstemperaturen den påfølgene måneden (sklearn). 
+"4 - Luftkvalitet"
+Viser luftforurensning. (Bruk av API)
+"5 - Interaktiv visning"
+Plotly-graf for temperaturen i de 5 største byene i Norge.
+"6 - Temperatur siste 10 årene"
+Historisk temperaturutvikling som interaktiv graf.
 
