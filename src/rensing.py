@@ -2,9 +2,8 @@ import pandas as pd
 import numpy as np
 
 # Leser data fra CSV-fil, som er lagret i UTF-8, og med semikolon som separator, holder kolonnen 'Tid(norsk normaltid)' som str
-def rens_tempdata():
-    df = pd.read_csv(
-        'data/csv/Temp_data_Theim_14_25.csv',
+def rens_tempdata(fil_inn, fil_ut):
+    df = pd.read_csv(fil_inn,
         sep=';',
         encoding='utf-8-sig',
         dtype={'Tid(norsk normaltid)': str}
@@ -22,9 +21,15 @@ def rens_tempdata():
         # Konverter til flyttall (float)
         df[kol] = df[kol].astype(float)
 
-    # Leser ikke siste rad i dataene
+    # Leser ikke siste rad i dataene (Tillegsrad fra Meteorologisk institutt)
     df = df.iloc[:-1]   
-
+    
+    # Konverterer 'Tid(norsk normaltid)' kolonnen til datetime
+    df['Date'] = pd.to_datetime(
+    df['Tid(norsk normaltid)'],
+    format='%m.%Y',   
+    errors='raise'
+)
     # Kun for å illustrere at det er NaN i dataene, og sjekker at rensingen er gjort riktig, har ingen funksjon utenom å visualisere.
     # Hvis det er NaN i første eller siste rad, så kan det ikke interpoleres, men pandas vil da bare sette NaN i stedet for å gi feil.
     for index in range(len(df)):
@@ -46,7 +51,7 @@ def rens_tempdata():
                 print("  Minimumstemperatur (mnd):", df['Minimumstemperatur (mnd)'][index + 1])
                 print("Den nye verdien blir: ", interpolert_verdi)
             else:
-                print("Ingen forrige eller neste rad å sammenligne med.")
+                print("Ingen forrige eller neste rad å hente verdi fra")
 
 
             print("-" * 40)
@@ -75,4 +80,16 @@ def rens_tempdata():
         df[kol] = df[kol].interpolate(method='linear')
 
     #Lagrer dataene i en ny CSV-fil
-    df.to_csv('data/csv/renset_tempdata_Theim.csv', sep=';', index=False, encoding='utf-8-sig')
+    df.to_csv(fil_ut, sep=';', index=False, encoding='utf-8-sig')
+
+
+if __name__ == "__main__":
+    fil_inn = "data/csv/Temp_data_Theim_14_25.csv"
+    fil_ut = "data/csv/renset_tempdata_Theim.csv"
+
+    # Sjekker om filen eksisterer
+    try:
+        rens_tempdata(fil_inn, fil_ut)
+        print(f"Rensing fullført. Data lagret i '{fil_ut}'.")
+    except Exception as e:
+        print(f"En feil oppstod under rensing: {e}")

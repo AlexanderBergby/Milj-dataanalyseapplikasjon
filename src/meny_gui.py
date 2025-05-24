@@ -13,12 +13,13 @@ from interaktiv import interaktiv
 from verdata_10_aar import vis_temperaturgraf
 
 #Renser data før meny visning.
-filnavn = "data/csv/renset_tempdata_Theim.csv"
+fil_inn = "data/csv/Temp_data_Theim_14_25.csv"
+fil_ut = "data/csv/renset_tempdata_Theim.csv"
 #Sjekker om filen eksisterer
-if not os.path.exists(filnavn):
-    rens_tempdata()
+if not os.path.exists(fil_ut):
+    rens_tempdata(fil_inn, fil_ut)
 else:
-    print(f"Filen '{filnavn}' eksisterer allerede. Ingen rensing nødvendig.")
+    print(f"Filen '{fil_ut}' eksisterer allerede. Ingen rensing nødvendig.")
 
 #For å komibinere en meny til verdata_uke og visualisering
 def åpne_væranalysemeny():
