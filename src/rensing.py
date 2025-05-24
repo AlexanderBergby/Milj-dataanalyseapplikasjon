@@ -24,10 +24,10 @@ def rens_tempdata(fil_inn, fil_ut):
     # Leser ikke siste rad i dataene (Tillegsrad fra Meteorologisk institutt)
     df = df.iloc[:-1]   
     
-    # Konverterer 'Tid(norsk normaltid)' kolonnen til datetime, og setter den som indeks
+    # Konverterer 'Tid(norsk normaltid)' kolonnen til datetime
     df['Date'] = pd.to_datetime(
     df['Tid(norsk normaltid)'],
-    format='%m.%Y',    # måned.år
+    format='%m.%Y',   
     errors='raise'
 )
     # Kun for å illustrere at det er NaN i dataene, og sjekker at rensingen er gjort riktig, har ingen funksjon utenom å visualisere.
@@ -51,7 +51,7 @@ def rens_tempdata(fil_inn, fil_ut):
                 print("  Minimumstemperatur (mnd):", df['Minimumstemperatur (mnd)'][index + 1])
                 print("Den nye verdien blir: ", interpolert_verdi)
             else:
-                print("Ingen forrige eller neste rad å sammenligne med.")
+                print("Ingen forrige eller neste rad å hente verdi fra")
 
 
             print("-" * 40)

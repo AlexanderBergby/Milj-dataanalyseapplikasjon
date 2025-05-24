@@ -169,3 +169,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+#Ignorerer tempreatur data som opprettes hver gang programmet kjøres.
+data/json/temperaturdata.json
