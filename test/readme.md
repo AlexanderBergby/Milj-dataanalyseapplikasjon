@@ -1,5 +1,7 @@
 Her er en kort beskrivelse av de ulike filene som eksisterer i mappen "test". Se kommentarer i koden for mer detaljer.
 
+For å kjøre testene skriv: "python3 -m unittest discover test" i terminalen.
+
 - test_lagre_temperatur.py
 Dette skriptet inneholder enhetstester for funksjonen lagre_temperaturdata fra verdatavisuell_na.py. Testene er skrevet med unittest og validerer at funksjonen lagrer korrekt strukturert temperaturdata i json-format. Negativ test for feil filbane (OSError).
 
