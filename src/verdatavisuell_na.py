@@ -8,6 +8,15 @@ from tkinter import messagebox
 url = "https://api.met.no/weatherapi/nowcast/2.0/complete"
 headers = {"User-Agent": "MyWeatherApp/1.0 (abergby@gmail.com)"}
 
+
+byer = [
+    ("Trondheim", 63.4308, 10.4034),
+    ("Oslo",      59.9139, 10.7522),
+    ("Bergen",    60.3913,  5.3221),
+    ("Stavanger", 58.9690,  5.7331),
+    ("Tromsø",    69.6496, 18.9560),
+]
+
 #Henter værdata for én posisjon
 def henter_vær_data(lat, lon):
 
@@ -19,7 +28,37 @@ def henter_vær_data(lat, lon):
         messagebox.showerror("Feil", f"Feil under henting av data. Statuskode: {response.status_code}")
         return None
 
-#Viser værvindu for valgt by
+def lagre_temperaturdata(filbane="data/json/temperaturdata.json"):
+
+    resultat = []
+
+    for by_navn, lat, lon in byer:
+        params = {"lat": lat, "lon": lon}
+        response = requests.get(url, params=params, headers=headers)
+
+        if response.status_code == 200:
+            data = response.json()
+            detaljer = data["properties"]["timeseries"][0]["data"]["instant"]["details"]
+            temperatur = detaljer.get("air_temperature", None)
+            if temperatur is not None:
+                resultat.append({
+                    "city": by_navn,
+                    "temperature": temperatur
+                })
+            else:
+                print(f"Ingen temperaturdata for {by_navn}")
+        else:
+            print(f"Feil ved henting av data for {by_navn}: {response.status_code}")
+
+    os.makedirs(os.path.dirname(filbane), exist_ok=True)
+
+    with open(filbane, "w") as f:
+        json.dump(resultat, f)
+
+    print(f"Temperaturdata lagret i: {filbane}")
+
+
+#Funksjon som viser værvindu for valgt by
 def lager_vær_vindu(by, data):
      #Henter den første målingen
     første = data["properties"]["timeseries"][0]
@@ -59,8 +98,10 @@ def lager_vær_vindu(by, data):
 
 #Hovedfunksjon for GUI-menyvalg
 def værdata_nå_visuell(root):
+    lagre_temperaturdata()
+    
     def hent_og_vis(lat, lon, by):
-        lagre_temperaturdata()
+        
         data = henter_vær_data(lat, lon)
         if data:
             lager_vær_vindu(by, data)
@@ -74,16 +115,7 @@ def værdata_nå_visuell(root):
 
     tk.Label(velger_vindu, text="Velg en by:", font=("Helvetica", 14, "bold")).pack(pady=15)
 
-
-    byvalg = [
-        ("Trondheim", 63.4308, 10.4034),
-        ("Oslo", 59.9139, 10.7522),
-        ("Bergen", 60.3913, 5.3221),
-        ("Stavanger", 58.9690, 5.7331),
-        ("Tromsø", 69.6496, 18.9560)
-    ]
-
-    for by, lat, lon in byvalg:
+    for by, lat, lon in byer:
         tk.Button(
             velger_vindu,
             text=by,
@@ -93,45 +125,10 @@ def værdata_nå_visuell(root):
 
     def avslutt():
         velger_vindu.destroy()
+        root.quit()
+        root.destroy()
 
     tk.Button(velger_vindu, text="Avslutt", width=25, bg="red", fg="black", command=avslutt).pack(pady=15)
-
-
-def lagre_temperaturdata(filbane="data/json/temperaturdata.json"):
-    byer = {
-        "Oslo": (59.9139, 10.7522),
-        "Bergen": (60.3913, 5.3221),
-        "Trondheim": (63.4308, 10.4034),
-        "Stavanger": (58.9690, 5.7331),
-        "Tromsø": (69.6496, 18.9560)
-    }
-
-    resultat = []
-
-    for by_navn, (lat, lon) in byer.items():
-        params = {"lat": lat, "lon": lon}
-        response = requests.get(url, params=params, headers=headers)
-
-        if response.status_code == 200:
-            data = response.json()
-            detaljer = data["properties"]["timeseries"][0]["data"]["instant"]["details"]
-            temperatur = detaljer.get("air_temperature", None)
-            if temperatur is not None:
-                resultat.append({
-                    "city": by_navn,
-                    "temperature": temperatur
-                })
-            else:
-                print(f"Ingen temperaturdata for {by_navn}")
-        else:
-            print(f"Feil ved henting av data for {by_navn}: {response.status_code}")
-
-    os.makedirs(os.path.dirname(filbane), exist_ok=True)
-
-    with open(filbane, "w") as f:
-        json.dump(resultat, f)
-
-    print(f"Temperaturdata lagret i: {filbane}")
 
 #For testing
 if __name__ == "__main__":

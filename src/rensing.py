@@ -24,7 +24,7 @@ def rens_tempdata(fil_inn, fil_ut):
     # Leser ikke siste rad i dataene (Tillegsrad fra Meteorologisk institutt)
     df = df.iloc[:-1]   
     
-    # Konverterer 'Tid(norsk normaltid)' kolonnen til datetime
+    # Legger til en ny kolonne 'Date' som konverterer 'Tid(norsk normaltid)' til datetime-format, brukes i prediktiv analyse
     df['Date'] = pd.to_datetime(
     df['Tid(norsk normaltid)'],
     format='%m.%Y',   
