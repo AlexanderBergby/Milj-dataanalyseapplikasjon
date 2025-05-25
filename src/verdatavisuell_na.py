@@ -3,6 +3,7 @@ import json
 import os
 import tkinter as tk
 from tkinter import messagebox
+from datetime import datetime
 
 #API-innstillinger
 url = "https://api.met.no/weatherapi/nowcast/2.0/complete"
