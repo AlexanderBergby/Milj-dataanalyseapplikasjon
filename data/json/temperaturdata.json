@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[{"city": "Oslo", "temperature": 12.1}, {"city": "Bergen", "temperature": 11.2}, {"city": "Trondheim", "temperature": 11.3}, {"city": "Stavanger", "temperature": 11.6}, {"city": "Troms\u00f8", "temperature": 11.2}]
-=======
-[{"city": "Oslo", "temperature": 11.4}, {"city": "Bergen", "temperature": 14.3}, {"city": "Trondheim", "temperature": 16.5}, {"city": "Stavanger", "temperature": 12.0}, {"city": "Troms\u00f8", "temperature": 15.1}]
->>>>>>> Serina
+[{"city": "Oslo", "temperature": 11.9}, {"city": "Bergen", "temperature": 10.5}, {"city": "Trondheim", "temperature": 14.8}, {"city": "Stavanger", "temperature": 10.7}, {"city": "Troms\u00f8", "temperature": 12.1}]

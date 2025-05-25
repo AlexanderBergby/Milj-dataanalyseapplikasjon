@@ -56,34 +56,6 @@ def lager_vær_vindu(by, data):
     tk.Label(vindu, text=f"Vindkast: {wind_gust} m/s", font=("Helvetica", 12)).pack(pady=5)
     tk.Label(vindu, text=ikon, font=("Helvetica", 48)).pack(pady=10)
 
-#Lagrer temperaturdata for alle 5 byer
-def lagre_temperaturdata(filbane="data/json/temperaturdata.json"):
-    byer = {
-        "Oslo": (59.9139, 10.7522),
-        "Bergen": (60.3913, 5.3221),
-        "Trondheim": (63.4308, 10.4034),
-        "Stavanger": (58.9690, 5.7331),
-        "Tromsø": (69.6496, 18.9560)
-    }
-
-    resultat = []
-    for by_navn, (lat, lon) in byer.items():
-        params = {"lat": lat, "lon": lon}
-        response = requests.get(url, params=params, headers=headers)
-        if response.status_code == 200:
-            data = response.json()
-            detaljer = data["properties"]["timeseries"][0]["data"]["instant"]["details"]
-            temperatur = detaljer.get("air_temperature", None)
-            if temperatur is not None:
-                resultat.append({
-                    "city": by_navn,
-                    "temperature": temperatur
-                })
-
-    os.makedirs(os.path.dirname(filbane), exist_ok=True)
-    with open(filbane, "w") as f:
-        json.dump(resultat, f)
-    print(f"Temperaturdata lagret i: {filbane}")
 
 #Hovedfunksjon for GUI-menyvalg
 def værdata_nå_visuell(root):
