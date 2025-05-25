@@ -9,7 +9,7 @@ url = "https://api.met.no/weatherapi/nowcast/2.0/complete"
 headers = {"User-Agent": "MyWeatherApp/1.0 (abergby@gmail.com)"}
 
 #Henter værdata for én posisjon
-def get_weather_data(lat, lon):
+def henter_vær_data(lat, lon):
 
     params = {"lat": lat, "lon": lon}
     response = requests.get(url, params=params, headers=headers)
@@ -20,7 +20,7 @@ def get_weather_data(lat, lon):
         return None
 
 #Viser værvindu for valgt by
-def create_weather_window(by, data):
+def lager_vær_vindu(by, data):
      #Henter den første målingen
     første = data["properties"]["timeseries"][0]
     time_text = første.get("time", "Ukjent tid")
@@ -89,9 +89,9 @@ def lagre_temperaturdata(filbane="data/json/temperaturdata.json"):
 def værdata_nå_visuell(root):
     def hent_og_vis(lat, lon, by):
         lagre_temperaturdata()
-        data = get_weather_data(lat, lon)
+        data = henter_vær_data(lat, lon)
         if data:
-            create_weather_window(by, data)
+            lager_vær_vindu(by, data)
 
     #Nytt vindu med byvalg
     velger_vindu = tk.Toplevel(root)
