@@ -136,3 +136,4 @@ if __name__ == "__main__":
     root.withdraw()  #skjuler hovedvinduet, men det trengs for å holde GUI i gang
     værdata_nå_visuell(root)
     root.mainloop()
+    
