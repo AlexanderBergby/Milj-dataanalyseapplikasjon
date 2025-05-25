@@ -52,7 +52,13 @@ class TestRensing(unittest.TestCase):
         forventet_min = (4.7 + 5.5) / 2
         self.assertAlmostEqual(df['Minimumstemperatur (mnd)'][6], forventet_min, places=2)
 
-
+    def test_float_formattering(self):
+        #Leser inn renset fil
+        df = pd.read_csv(self.fil_ut, sep=';', encoding='utf-8-sig')
+        #Sjekker at temperaturene er i riktig format
+        self.assertTrue(df['Maksimumstemperatur (mnd)'].dtype == 'float64')
+        self.assertTrue(df['Minimumstemperatur (mnd)'].dtype == 'float64')
+        
 
     def tearDown(self):
         self.temp_dir.cleanup()
