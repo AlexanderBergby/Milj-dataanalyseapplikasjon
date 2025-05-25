@@ -23,7 +23,7 @@ def vis_temperaturgraf():
 
     # Setter tittel og x-akse med range slider og knapper (lik eksempelkoden fra Plotly)
     fig.update_layout(
-        title_text="Månedlig maksimums- og minimumstemperatur",
+        title_text="Månedlig maksimums- og minimumstemperatur for Lade i Trondheim (2014-2025)",
         xaxis=dict(
             rangeselector=dict(
                 buttons=list([
