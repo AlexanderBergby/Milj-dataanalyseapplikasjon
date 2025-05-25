@@ -3,6 +3,7 @@ import json
 import os
 import tkinter as tk
 from tkinter import messagebox
+from datetime import datetime
 
 #API-innstillinger
 url = "https://api.met.no/weatherapi/nowcast/2.0/complete"
@@ -62,7 +63,8 @@ def lagre_temperaturdata(filbane="data/json/temperaturdata.json"):
 def lager_vær_vindu(by, data):
      #Henter den første målingen
     første = data["properties"]["timeseries"][0]
-    time_text = første.get("time", "Ukjent tid")
+    iso_tid = første.get("time", "Ukjent tid")
+    time_text = datetime.fromisoformat(iso_tid.replace("Z", "+00:00")).strftime("%d.%m.%Y %H:%M")
     details = første.get("data", {}).get("instant", {}).get("details", {})
     air_temp = details.get("air_temperature", "N/A")
     precip_rate = details.get("precipitation_rate", "N/A")
