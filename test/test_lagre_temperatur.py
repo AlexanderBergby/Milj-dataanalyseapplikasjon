@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 's
 
 from verdatavisuell_na import lagre_temperaturdata
 
-class TestWeatherData(unittest.TestCase):
+class TestVerData(unittest.TestCase):
     def test_lagre_temperaturdata_oppretter_fil(self):
         test_fil = "data/json/test_temperatur.json"
         lagre_temperaturdata(test_fil)
