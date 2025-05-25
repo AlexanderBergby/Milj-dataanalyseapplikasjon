@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 's
 
 from verdatavisuell_na import get_weather_data
 
-class TestWeatherData(unittest.TestCase):
+class TestVerData(unittest.TestCase):
     #lager "fake" versjoner vi kan teste
     @patch("verdatavisuell_na.messagebox.showerror")
     @patch("verdatavisuell_na.requests.get")
