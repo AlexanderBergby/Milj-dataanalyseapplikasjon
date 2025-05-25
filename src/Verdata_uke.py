@@ -64,7 +64,7 @@ def værdata_uke():
     output_text = "Værforhold - Trondheim (Granåsen)\n\n"
 
     #Beregner statistikk for hver dag
-    #FORKLAR MEDIAN OG SATNDARDAVVIK
+    #En utfyllene forklaring for statistikk ligger i readme
     for dag_nummer, dato in enumerate(sorted(temperatur_data.keys()), 1):
         min_temp = min(temperatur_data[dato])
         max_temp = max(temperatur_data[dato])

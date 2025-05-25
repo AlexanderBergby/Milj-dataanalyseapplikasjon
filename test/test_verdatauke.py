@@ -27,11 +27,24 @@ class TestVærdataUkeMinimal(unittest.TestCase):
         self.assertTrue(forventede_kolonner.issubset(df.columns))
         self.assertGreaterEqual(len(df), 1)
 
-    #Negativ test med en "mock"fil
-    @patch("pandas.DataFrame.to_csv", side_effect=OSError("Kan ikke lagre fil"))
-    def test_feil_ved_lagring(self, mock_csv):
-        with self.assertRaises(OSError):
-            værdata_uke()
+    #Negativ test
+    def test_feil_ved_lagring_skrivebeskyttet_fil(self):
+        filnavn = "data/csv/weather_data.csv"
+
+        #Sørger for at filen eksisterer først
+        værdata_uke()
+
+        #Gjør filen skrivebeskyttet
+        os.chmod(filnavn, 0o444)  #Kun lesetilgang
+
+        try:
+            #Nå vil værdata_uke() forsøke å skrive til en skrivebeskyttet fil og feile
+            with self.assertRaises((PermissionError, OSError)):
+                værdata_uke()
+        finally:
+            #Tilbakestill rettighetene slik at andre tester eller opprydding kan fungere
+            os.chmod(filnavn, 0o666)
+
 
 if __name__ == "__main__":
     unittest.main()

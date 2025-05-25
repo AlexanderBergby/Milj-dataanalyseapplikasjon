@@ -28,6 +28,9 @@ Her er en kort beskrivelse av de ulike filene som eksisterer i mappen "src". Se 
     ID: e1e74478-764e-4bac-8a69-f70fe2ed8c6d
     Secret: 29556497-9e34-4403-bcbe-0e406da014ee
 
+    I denne koden beregnes blant annet median, gjennomsnitt og standardavvik.
+    Median, gjennomsnitt og standardavvik gir viktig innsikt i datasettets fordeling og variasjon. Gjennomsnitt viser den typiske verdien, men kan påvirkes av ekstreme verdier. Median er den midterste verdien og er nyttig for datasett med store avvik. Standardavvik måler variasjonen rundt gjennomsnittet og hjelper med å vurdere usikkerheten i dataene. Disse målene er viktige for å forstå mønstre og variasjon i datasettet.
+
 - Verdatavisuell_na.py
     GUI som henter og viser sanntidsdata (temperatur, nedbør, vind osv.) for fem norske byer. Data lagres også i JSON.
 

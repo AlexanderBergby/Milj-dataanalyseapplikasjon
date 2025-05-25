@@ -1,12 +1,12 @@
 import pandas as pd
 
-#Last inn datafilen
+#Laster inn datafilen
 df = pd.read_csv("data/csv/renset_tempdata_Theim.csv", sep=";")
 
 #Gjør kolonnenavnet lettere å bruke
 df.rename(columns={"Maksimumstemperatur (mnd)": "max_temp"}, inplace=True)
 
-#Beregn IQR (interkvartilavstand)
+#Beregner IQR (interkvartilavstand)
 Q1 = df["max_temp"].quantile(0.25)
 Q3 = df["max_temp"].quantile(0.75)
 IQR = Q3 - Q1
