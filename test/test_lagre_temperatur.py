@@ -27,7 +27,7 @@ class TestVerData(unittest.TestCase):
         #Fjerner testfilen
         os.remove(test_fil)
 
-#Negativ test:      
+#Negativ test:
     def test_lagre_feil_filbane(self):
         with self.assertRaises(OSError):
             #Sjekker opprativsystem til brukeren
