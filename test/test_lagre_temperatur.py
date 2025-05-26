@@ -30,7 +30,8 @@ class TestVerData(unittest.TestCase):
 #Negativ test:
     def test_lagre_feil_filbane(self):
         with self.assertRaises(OSError):
-            #Sjekker opprativsystem til brukeren
+            #If setning for å sjekke opprativsystem til brukeren
+            #Tester en ugyldig filbane.
             if os.name == "nt":
                 feil_filbane = "C:/Windows/ugyldig_mappe/test.json"
             else:
