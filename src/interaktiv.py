@@ -41,12 +41,12 @@ def interaktiv():
         custom_data=['city', 'temperature'],
         title='Temperatur i store norske byer'
     )
-
+    
     fig_geo.update_traces(
         marker=dict(line=dict(width=1, color='white')),
-        hovertemplate='<b>%{customdata[0]}</b><br>Temperatur: %{customdata[1]} °C<extra></extra>'
+        hovertemplate='<b>%{customdata[0]}</b><br>Temperatur: %{customdata[1]} °C'
     )
-
+    #Oppdaterer kartets geografi for Europa
     fig_geo.update_geos(
         scope="europe",
         lataxis_range=[57, 72],

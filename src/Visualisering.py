@@ -12,7 +12,7 @@ def visualisering():
     try:
         df = pd.read_csv(filnavn, parse_dates=['date'])
     except FileNotFoundError:
-        print(f"Filen '{filnavn}' ble ikke funnet. Sørg for at du har kjørt alternativ 2 i menyen først.")
+        print(f"Filen '{filnavn}' ble ikke funnet. Sørg for at du har kjørt alternativ 1 i menyen først.")
         return
 
     df.set_index('date', inplace=True)

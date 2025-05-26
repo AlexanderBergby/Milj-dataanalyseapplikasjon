@@ -127,8 +127,6 @@ def værdata_nå_visuell(root):
 
     def avslutt():
         velger_vindu.destroy()
-        root.quit()
-        root.destroy()
 
     tk.Button(velger_vindu, text="Avslutt", width=25, bg="red", fg="black", command=avslutt).pack(pady=15)
 

@@ -1,7 +1,8 @@
 Her er en kort beskrivelse av de ulike filene som eksisterer i mappen "src". Se kommentarer i filene for mer detaljert beskrivelse.
 
 - interaktiv.py
-    Bruker funksjonen fra verdatavisuell_na.py til å hente og vise temperatur i de fem største byene i Norge (Oslo, Bergen, Trondheim, Stavanger og Tromsø). Dataene visualiseres på et kart over Europa ved hjelp av plotly.express. 
+    Bruker funksjonen fra verdatavisuell_na.py til å hente og vise temperatur i de fem største byene i Norge (Oslo, Bergen, Trondheim, Stavanger og Tromsø). Dataene visualiseres på et kart over Europa ved hjelp av plotly.express.
+    Koden er hentet og modifisert fra https://plotly.com/python/scatter-plots-on-maps/ og https://plotly.com/python/hover-text-and-formatting/
 
 - luftkvalitet.py
     Henter og visualiserer luftkvalitet prognoser for NO2, PM10, PM2.5, O3 og total AQI med matplotlib og seaborn.
