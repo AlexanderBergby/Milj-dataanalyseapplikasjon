@@ -30,8 +30,12 @@ class TestVerData(unittest.TestCase):
 #Negativ test:      
     def test_lagre_feil_filbane(self):
         with self.assertRaises(OSError):
-            #Prøver å lagre i en ugyldig mappe
-            lagre_temperaturdata("/ugyldig_mappe/test.json")
+            #Sjekker opprativsystem til brukeren
+            if os.name == "nt":
+                feil_filbane = "C:/Windows/ugyldig_mappe/test.json"
+            else:
+                feil_filbane = "/ugyldig_mappe/test.json"
+            lagre_temperaturdata(feil_filbane)
 
 
 if __name__ == "__main__":
