@@ -17,11 +17,7 @@ requirements.txt     #pakker/krav til å kunne kjøre koden
 Alle mappene inneholder egen readme.md med beskrivelse av mappens innhold.
 
 
-Det er to ulike metoder for å kjøre programmet vårt:
-1.  Skriv inn følgene i terminalen:
-python3 src/meny_gui.py
-
-2. Kjør koden meny_gui.py, som ligger i src mappen.
+For å kjøre applikasjonen kjør koden meny_gui.py, som ligger i src mappen.
 
 En beskrivelse av menyen og dens innhold: 
 "1 - Værmelding-Norske byer" 
