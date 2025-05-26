@@ -1,6 +1,6 @@
 """
+luftkvalitet.py
 Skript for å hente og visualisere luftkvalitetsprognosedata fra Meteorologisk institutt
-
 """
 
 import requests
