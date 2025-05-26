@@ -5,14 +5,15 @@ Dette er Python-program som samler inn, analyserer og visualiserer vær- og milj
 
 Mappestrukturen vår seg følgende ut: 
 Milj-dataanalyseapplikasjon/
-├── data/                #Rådata og analyserte data (CSV/JSON)
-├── docs/                #Viktige dokumenter (pdf og md)
-├── resources/           #Bakgrunnsbilde brukt i GUI-menyen
-├── src/                 #All kode og hovedmeny (meny_gui.py)
-├── test/                #Enhetstester for ulike funksjoner
-├──.gitignore            #gitignore fil
-├──README.md             #denne filen
-└── requirements.txt     #pakker/krav til å kunne kjøre koden
+data/                #Rådata og analyserte data (CSV/JSON)
+docs/                #Viktige dokumenter (pdf og md)
+resources/           #Bakgrunnsbilde brukt i GUI-menyen
+src/                 #All kode og hovedmeny (meny_gui.py)
+test/                #Enhetstester for ulike funksjoner
+.gitignore           #gitignore fil
+README.md            #denne filen
+requirements.txt     #pakker/krav til å kunne kjøre koden
+
 Alle mappene inneholder egen readme.md med beskrivelse av mappens innhold.
 
 
