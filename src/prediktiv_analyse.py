@@ -1,3 +1,8 @@
+"""
+prediktiv_analyse.py
+Dette skriptet utfører en prediktiv analyse av temperaturdata ved hjelp av lineær regresjon.
+"""
+
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score

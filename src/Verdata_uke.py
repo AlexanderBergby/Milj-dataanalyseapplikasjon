@@ -1,3 +1,9 @@
+""""
+Verdata_uke.py
+Skript for å hente og vise værdata for de siste 7 dagene i Trondheim (Granåsen)
+"""
+
+
 import requests
 import numpy as np
 from datetime import datetime, timedelta, UTC

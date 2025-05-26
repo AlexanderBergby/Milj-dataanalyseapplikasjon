@@ -1,3 +1,8 @@
+"""
+verdata_10_aar.py
+Dette skriptet visualiserer månedlig maksimums- og minimumstemperatur for Lade i Trondheim
+fra 2014 til 2025 ved hjelp av Plotly."""
+
 import pandas as pd
 import plotly.graph_objects as go
 

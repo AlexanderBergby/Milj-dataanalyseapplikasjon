@@ -1,3 +1,12 @@
+"""
+værapp_gui.py
+
+Dette skriptet starter en værapp ved hjelp av Tkinter.
+Det renser rå temperaturdata, setter opp en hovedmeny med flere alternativer for visning
+av værdata (nåværende, ukeoversikt, prediktiv analyse, luftkvalitet, interaktiv visning,
+og temperaturhistorikk siste 10 år), og kjører disse basert på brukers valg.
+"""
+
 import tkinter as tk
 import sys
 import os

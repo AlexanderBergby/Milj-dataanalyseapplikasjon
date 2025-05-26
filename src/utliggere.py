@@ -1,3 +1,8 @@
+"""
+uteliggere.py
+Dette skriptet identifiserer og viser uteliggere i maksimumstemperaturdata fra en CSV-fil.
+"""
+
 import pandas as pd
 
 #Laster inn datafilen
