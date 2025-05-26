@@ -38,6 +38,17 @@ class TestRensing(unittest.TestCase):
         # Sjekker at den rensede filen er opprettet
         self.assertTrue(os.path.exists(self.fil_ut))
 
+    def test_rensing_strek_fjerning(self):
+        # Leser inn den rensede filen
+        df = pd.read_csv(self.fil_ut, sep=';', encoding='utf-8-sig')
+        # Sjekker at det ikke finnes noen rader med strek i 'Maksimumstemperatur (mnd)' eller 'Minimumstemperatur (mnd)'
+        #Må gjøre om til string for å for at sjekken skal fungere
+        maks_str = df['Maksimumstemperatur (mnd)'].astype(str)
+        mini_str = df['Minimumstemperatur (mnd)'].astype(str)
+
+        self.assertFalse((maks_str == '-').any())
+        self.assertFalse((mini_str == '-').any())
+
     def test_rensing_interpolering(self):
         # Leser inn den rensede filen
         df = pd.read_csv(self.fil_ut, sep=';', encoding='utf-8-sig')
