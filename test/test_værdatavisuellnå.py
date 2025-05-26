@@ -1,7 +1,7 @@
 import sys
 import unittest
 import os
-
+from unittest.mock import patch
 #gjør src tilgjengelig
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
