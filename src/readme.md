@@ -8,6 +8,7 @@ Her er en kort beskrivelse av de ulike filene som eksisterer i mappen "src". Se 
 
 - prediktiv_analyse.py
     Bygger en lineær regresjonsmodell for å predikere neste måneds maksimumstemperatur, basert på data fra 10 år tilbake. Viser resultater i GUI og graf. I prediksjonen blir hele datasettet (både min og maks temperatur) tatt i bruk, men bare makstemepratur blir predikeres.
+    Hensikten med train_test_split metoden er å dele dataen inn i et trenings-sett hvor modellen lærer fra disse tallene, og de resterende blir brukt til å teste modellen. Vi har brukt 0.2, som vil si at 80% av dataen brukes til å trenes med i mens resterende 20% går til testing. RMS og R^2 kan brukes til å evaulere modellens ytelse.
 
 - rensing.py
     Renser og forbehandler rå CSV-temperaturdata: konverterer verdier manglende verdier ("-") til NaN og fyller inn manglende data vha interpolering. 
