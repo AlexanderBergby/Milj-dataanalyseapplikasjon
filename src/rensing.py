@@ -1,3 +1,9 @@
+""""
+rensing.py
+Dette skriptet renser temperaturdata fra en CSV-fil, konverterer data til riktig format,
+interpolerer manglende verdier, og lagrer de rensede dataene i en ny CSV-fil.
+"""
+
 import pandas as pd
 import numpy as np
 

@@ -1,3 +1,7 @@
+"""
+Visiualisering.py
+Dette skriptet visualiserer temperaturdata fra en CSV-fil ved hjelp av Matplotlib og Seaborn.
+"""
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns

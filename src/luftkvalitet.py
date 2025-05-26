@@ -1,3 +1,8 @@
+"""
+Skript for å hente og visualisere luftkvalitetsprognosedata fra Meteorologisk institutt
+
+"""
+
 import requests
 import datetime
 import pandas as pd

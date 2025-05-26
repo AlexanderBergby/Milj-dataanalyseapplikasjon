@@ -1,3 +1,9 @@
+"""
+verdatavisuell_na.py
+Dette skriptet henter værdata for flere norske byer ved hjelp av MET API,
+og viser værmeldingen i et GUI ved bruk av Tkinter.
+"""
+
 import requests
 import json
 import os

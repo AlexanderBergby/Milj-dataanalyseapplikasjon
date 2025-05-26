@@ -1,3 +1,7 @@
+"""
+interaktiv.py
+Skript for å lage et interaktivt kart som viser temperaturdata for store norske byer ved bruk av Plotly Express.
+"""
 import json
 import pandas as pd
 import plotly.express as px
@@ -41,7 +45,7 @@ def interaktiv():
         custom_data=['city', 'temperature'],
         title='Temperatur i store norske byer'
     )
-    
+
     fig_geo.update_traces(
         marker=dict(line=dict(width=1, color='white')),
         hovertemplate='<b>%{customdata[0]}</b><br>Temperatur: %{customdata[1]} °C'
